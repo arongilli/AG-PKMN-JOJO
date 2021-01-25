@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,19 +9,34 @@ public class Unit : MonoBehaviour
     public string unitName;
     public int unitLevel;
 
-    public int damage;
+    public float damage;
 
-    public int maxHP;
-    public int currentHP;
-    // Start is called before the first frame update
-    void Start()
+    public float maxHP;
+    public float currentHP;
+
+    public float defense;
+
+    private void Start()
     {
-        
+        currentHP = maxHP;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool TakeDamage(float damageAmount)
     {
-        
+        currentHP -= damageAmount - defense;
+
+        if (currentHP <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Guard(float defenseMoltiplier)
+    {
+        defense *= defenseMoltiplier;
     }
 }
